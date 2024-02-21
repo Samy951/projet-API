@@ -20,13 +20,13 @@ function PdfForm() {
             });
             if (!response.ok) throw new Error('Erreur de réseau');
 
-            // Vérifier si la réponse est du PDF
+
             if (response.headers.get("Content-Type")?.includes("application/pdf")) {
-                // Créez un objet URL à partir de la réponse blob
+
                 const blob = await response.blob();
                 const downloadUrl = window.URL.createObjectURL(blob);
 
-                // Créez un élément de lien et déclenchez le téléchargement
+
                 const a = document.createElement("a");
                 document.body.appendChild(a);
                 a.style.display = "none";
@@ -34,7 +34,7 @@ function PdfForm() {
                 a.download = "certificat_maladie.pdf"; // Vous pouvez spécifier le nom du fichier ici
                 a.click();
 
-                // Nettoyer l'objet URL et l'élément de lien
+
                 window.URL.revokeObjectURL(downloadUrl);
                 document.body.removeChild(a);
             } else {
@@ -73,10 +73,11 @@ function PdfForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+            <form onSubmit={handleSubmit} className={"flex gap-y-2 m-auto flex-col"}>
+            <div className={"flex gap-4 justify-between"}>
                 <label htmlFor="nom">Nom</label>
                 <input
+                    className={"border-2 border-gray-300"}
                     type="text"
                     id="nom"
                     name="nom"
@@ -84,9 +85,10 @@ function PdfForm() {
                     onChange={handleChange}
                 />
             </div>
-            <div>
+            <div className={"flex gap-4 justify-between"}>
                 <label htmlFor="prenom">Prénom</label>
                 <input
+                    className={"border-2 border-gray-300"}
                     type="text"
                     id="prenom"
                     name="prenom"
@@ -94,9 +96,10 @@ function PdfForm() {
                     onChange={handleChange}
                 />
             </div>
-            <div>
+            <div className={"flex gap-4 justify-around"}>
                 <label htmlFor="date">Date</label>
                 <input
+                    className={"border-2 border-gray-300"}
                     type="date"
                     id="date"
                     name="date"
@@ -104,9 +107,10 @@ function PdfForm() {
                     onChange={handleChange}
                 />
             </div>
-            <div>
+            <div className={"flex gap-4 justify-between"}>
                 <label htmlFor="duree">Durée</label>
                 <input
+                    className={"border-2 border-gray-300"}
                     type="number"
                     id="duree"
                     name="duree"
@@ -114,9 +118,10 @@ function PdfForm() {
                     onChange={handleChange}
                 />
             </div>
-            <div>
+            <div className={"flex gap-4 justify-between"}>
                 <label htmlFor="dateDebut">Date de début</label>
                 <input
+                    className={"border-2 border-gray-300"}
                     type="date"
                     id="dateDebut"
                     name="dateDebut"
@@ -125,11 +130,11 @@ function PdfForm() {
                 />
             </div>
             <button
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center justify-center">
                 <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
                 </svg>
-                <span>Générer PDF</span>
+                <span >Générer PDF</span>
             </button>
         </form>
     );
